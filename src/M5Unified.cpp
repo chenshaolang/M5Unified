@@ -88,7 +88,7 @@ static constexpr const uint8_t _pin_table_i2c_ex_in[][5] = {
 { board_t::board_M5AtomS3RExt , GPIO_NUM_0 ,GPIO_NUM_45 , GPIO_NUM_1 ,GPIO_NUM_2  },
 { board_t::board_M5AtomEchoS3R, GPIO_NUM_0 ,GPIO_NUM_45 , GPIO_NUM_1 ,GPIO_NUM_2  },
 { board_t::board_M5AtomS3RCam , GPIO_NUM_0 ,GPIO_NUM_45 , GPIO_NUM_1 ,GPIO_NUM_2  },
-{ board_t::board_M5PaperS3    , GPIO_NUM_42,GPIO_NUM_41 , GPIO_NUM_1 ,GPIO_NUM_2  },
+{ board_t::board_M5PaperS3    , GPIO_NUM_40,GPIO_NUM_39 , 255 ,255  },
 { board_t::board_M5StampPLC   , GPIO_NUM_15,GPIO_NUM_13 , GPIO_NUM_1 ,GPIO_NUM_2  },
 { board_t::board_M5PowerHub   , GPIO_NUM_48,GPIO_NUM_45 , GPIO_NUM_16,GPIO_NUM_15 },
 { board_t::board_unknown      , GPIO_NUM_39,GPIO_NUM_38 , GPIO_NUM_1 ,GPIO_NUM_2  }, // AtomS3,AtomS3Lite,AtomS3U
@@ -161,7 +161,7 @@ static constexpr const uint8_t _pin_table_spi_sd[][5] = {
 { board_t::board_M5Capsule    , GPIO_NUM_14, GPIO_NUM_12, GPIO_NUM_39, GPIO_NUM_11 },
 { board_t::board_M5Cardputer  , GPIO_NUM_40, GPIO_NUM_14, GPIO_NUM_39, GPIO_NUM_12 },
 { board_t::board_M5CardputerADV,GPIO_NUM_40, GPIO_NUM_14, GPIO_NUM_39, GPIO_NUM_12 },
-{ board_t::board_M5PaperS3    , GPIO_NUM_39, GPIO_NUM_38, GPIO_NUM_40, GPIO_NUM_47 },
+{ board_t::board_M5PaperS3    , GPIO_NUM_14, GPIO_NUM_13, GPIO_NUM_21, GPIO_NUM_12 },
 { board_t::board_M5StampPLC   , GPIO_NUM_7,  GPIO_NUM_8,  GPIO_NUM_9,  GPIO_NUM_10 },
 #elif defined (CONFIG_IDF_TARGET_ESP32C3)
 #elif defined (CONFIG_IDF_TARGET_ESP32C6)
@@ -215,7 +215,7 @@ static constexpr const uint8_t _pin_table_other1[][2] = {
 { board_t::board_M5Capsule     , GPIO_NUM_46 },
 { board_t::board_M5AirQ        , GPIO_NUM_46 },
 { board_t::board_M5DinMeter    , GPIO_NUM_46 },
-{ board_t::board_M5PaperS3     , GPIO_NUM_44 },
+{ board_t::board_M5PaperS3     , 255 },
 
 #elif defined (CONFIG_IDF_TARGET_ESP32C3)
 #elif defined (CONFIG_IDF_TARGET_ESP32C6)
@@ -2080,8 +2080,8 @@ static constexpr const uint8_t _pin_table_mbus[][31] = {
       case board_t::board_M5PaperS3:
         if (cfg.internal_spk)
         {
-          spk_cfg.pin_data_out = GPIO_NUM_21;
-          spk_cfg.buzzer = true;
+          spk_cfg.pin_data_out = 255;
+          spk_cfg.buzzer = false;
           spk_cfg.magnification = 48;
         }
         break;
