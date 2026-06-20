@@ -195,13 +195,18 @@ namespace m5
       break;
 
     case board_t::board_M5PaperS3:
-
-      // m5gfx::pinMode(M5PaperS3_CHG_STAT_PIN, m5gfx::pin_mode_t::input);
-      // _batAdcCh = ADC1_GPIO3_CHANNEL;
-      // _batAdcUnit = 1;
-      // _pmic = pmic_t::pmic_adc;
-      // _adc_ratio = 2.0f;
-      // _wakeupPin = GPIO_NUM_48; // touch panel INT
+#if defined(LILYGO_EPD47_PRO)
+      // LilyGo: 使用外部 BQ27220 电量计，不使用 M5.Power 的 ADC 路径
+      _wakeupPin = GPIO_NUM_48; // touch panel INT
+#else
+      // PaperS3: 使用 ADC 读取电池电量
+      m5gfx::pinMode(M5PaperS3_CHG_STAT_PIN, m5gfx::pin_mode_t::input);
+      _batAdcCh = ADC1_GPIO3_CHANNEL;
+      _batAdcUnit = 1;
+      _pmic = pmic_t::pmic_adc;
+      _adc_ratio = 2.0f;
+      _wakeupPin = GPIO_NUM_48; // touch panel INT
+#endif
       break;
 
     case board_t::board_M5Capsule:
@@ -1763,8 +1768,11 @@ namespace m5
         break;
 
       case board_t::board_M5PaperS3:
-        // return (m5gfx::gpio_in(M5PaperS3_CHG_STAT_PIN) == false) ? is_charging_t::is_charging : is_charging_t::is_discharging;
+#if defined(LILYGO_EPD47_PRO)
         return is_charging_t::is_discharging;
+#else
+        return (m5gfx::gpio_in(M5PaperS3_CHG_STAT_PIN) == false) ? is_charging_t::is_charging : is_charging_t::is_discharging;
+#endif
 
       case board_t::board_M5PowerHub: // 0x50 reg is not accurate
         return (getBatteryCurrent() < -10) ? is_charging_t::is_charging : is_charging_t::is_discharging;
