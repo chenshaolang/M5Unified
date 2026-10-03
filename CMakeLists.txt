@@ -11,7 +11,9 @@ file(GLOB SRCS
      )
 set(COMPONENT_SRCS ${SRCS})
 
-if (IDF_VERSION_MAJOR GREATER_EQUAL 5)
+if (IDF_VERSION_MAJOR GREATER_EQUAL 6)
+    set(COMPONENT_REQUIRES M5GFX esp_adc driver esp_driver_i2s esp_driver_rmt)
+elseif (IDF_VERSION_MAJOR GREATER_EQUAL 5)
     set(COMPONENT_REQUIRES M5GFX esp_adc driver)
 else()
     set(COMPONENT_REQUIRES M5GFX esp_adc_cal)

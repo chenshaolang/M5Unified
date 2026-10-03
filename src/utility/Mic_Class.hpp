@@ -20,6 +20,9 @@
  #include <driver/i2s.h>
 #endif
 
+// [idf-v6.1 port] restore i2s_port_t / M5_I2S_PORT_MAX removed in ESP-IDF v6.x
+#include "m5_i2s_port_compat.h"
+
 #endif
 
 #include <stdint.h>

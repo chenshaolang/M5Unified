@@ -89,7 +89,7 @@ namespace m5
 
 #if __has_include(<driver/i2s_std.h>)
 
-  static i2s_chan_handle_t _i2s_handle[SOC_I2S_NUM] = { nullptr, };
+  static i2s_chan_handle_t _i2s_handle[M5_I2S_PORT_MAX] = { nullptr, };
 
   static esp_err_t _i2s_start(i2s_port_t port) {
     return i2s_channel_enable(_i2s_handle[port]);

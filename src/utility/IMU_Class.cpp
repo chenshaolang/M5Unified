@@ -532,11 +532,11 @@ namespace m5
       int32_t pv = prev_value[i];
       int32_t diff = d - pv;
       prev_value[i] = d;
-      maxdiff = std::max(maxdiff, abs(diff));
+      maxdiff = std::max<int32_t>(maxdiff, abs(diff));
 
       int32_t av = avg_value[i];
       diff = d - av;
-      maxdiff = std::max(maxdiff, abs(diff));
+      maxdiff = std::max<int32_t>(maxdiff, abs(diff));
 
       diff = (diff + (1 << (average_shifter - 1))) >> average_shifter;
       avg_value[i] = av + diff;
